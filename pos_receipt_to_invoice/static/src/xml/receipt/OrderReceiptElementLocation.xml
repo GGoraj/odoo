@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <!-- Total and Change are repositioned -->
+    <t t-name="OrderReceiptElementLocation" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[@class='pos-receipt-amount'][1]" position='attributes'>
+            <attribute name="style">padding-left:0px;</attribute>
+        </xpath>
+        <xpath expr="//t/div[@class='pos-receipt-amount'][1]" position='attributes'>
+            <attribute name="style">padding-left:0px;</attribute>
+        </xpath>
+        <xpath expr="//t/div[@class='pos-receipt-amount'][2]" position='attributes'>
+            <attribute name="style">padding-left:0px;</attribute>
+        </xpath>
+        <xpath expr="//div[@class='pos-receipt-amount receipt-change']" position='attributes'>
+            <attribute name="style">padding-left:0px;</attribute>
+        </xpath>
+    </t>
+</templates>

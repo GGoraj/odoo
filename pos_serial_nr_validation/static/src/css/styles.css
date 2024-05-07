@@ -1,0 +1,13 @@
+.validated-errors {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    color: #AB0404;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    gap:2px;
+}

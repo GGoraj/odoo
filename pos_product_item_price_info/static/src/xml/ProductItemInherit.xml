@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--This file extends ProductItem with 'info' icon. Hover over it and it will display products prices.-->
+<templates>
+    <t t-name="product_item_price_info" t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[@class='price-tag']" position="attributes">
+            <attribute name="style">display: flex; flex-direction: row; justify-content: space-between;</attribute>
+        </xpath>
+        <xpath expr="//span[@class='price-tag']/t[@t-esc]" position="after">
+            <i class="fa fa-info-circle"
+               role="img" aria-label="Info"
+               t-on-click="infoClicked"
+            />
+        </xpath>
+    </t>
+</templates>

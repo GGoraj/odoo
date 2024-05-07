@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-inherit="point_of_sale.EditListInput" t-inherit-mode="extension">
+        <!-- 'remove' element is overriden to add margin inbetween input field and the 'remove' button -->
+        <xpath expr="//div/i" position="replace">
+            <div style="display: inline-block; margin-inline-start: 5px;">
+                <i class="oe_link_icon fa fa-trash-o"
+                   role="img"
+                   aria-label="Remove"
+                   title="Remove"
+                   t-on-click="() => {  this.trigger('remove-item', props.item); clearErrors();}"
+                   style="display: inline-block;"
+                   t-att-style="'color:' + ((state.anyError === true or
+                    (props.lastLineFaulty[0] === true and props.lastLineFaulty[1] === props.item._id)) ?
+                    'red' : 'inherit') + '; display: inline-block;'"/>
+            </div>
+        </xpath>
+    </t>
+</templates>

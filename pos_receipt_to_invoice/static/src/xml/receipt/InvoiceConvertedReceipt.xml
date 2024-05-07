@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="invoice_converted_receipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <!--        here ends the 'Served by Cashier part of receipt -->
+        <xpath expr="//div[contains(@class, 'pos-receipt-contact')]" position="after">
+
+            <!--            partner -->
+            <div t-if="this.props.order.partner" class="pos-receipt pos-receipt-contact">
+                <div>------------------------</div>
+                <!--                name-->
+                <div t-if="this.props.order.partner.name">
+                    <t t-esc="this.props.order.partner.name"/>
+                </div>
+                <!--                street-->
+                <div t-if="this.props.order.partner.street">
+                    <t t-esc="this.props.order.partner.street"/>
+                </div>
+                <!--                zip, city-->
+                <div>
+                    <span style="margin-right: 2px" t-if="this.props.order.partner.zip">
+                        <t t-esc="this.props.order.partner.zip"/>
+                    </span>
+                    <span t-if="this.props.order.partner.state_id[1]">
+                        <t t-esc="this.props.order.partner.state_id[1]"/>
+                    </span>
+                </div>
+                <!--                country-->
+                <div t-if="this.props.order.partner.country_id[1]">
+                    <t t-esc="this.props.order.partner.country_id[1]"/>
+                </div>
+                <!--                moms (vat)-->
+                <div t-if="this.props.order.partner.vat">
+                    <t t-esc="this.props.order.partner.vat"/>
+                </div>
+            </div>
+
+            <!-- Faktura begins here -->
+            <div t-if="this.state and this.state.inv_payment_reference or this.props.reprint_order and this.props.reprint_order.inv_payment_reference"
+                 class="receipt"
+                 style="margin-top:30px;">
+
+                <!-- Faktura Reference (for current order or reprint) -->
+                <div t-if="this.state.inv_payment_reference" class="line">
+                    <span class="label">Faktura</span>
+                    <span class="value" t-esc="this.state.inv_payment_reference"/>
+                </div>
+                <div t-if="this.props.reprint_order and this.props.reprint_order.inv_payment_reference" class="line">
+                    <span class="label">Faktura</span>
+                    <span class="value" t-esc="this.props.reprint_order.inv_payment_reference"/>
+                </div>
+
+                <!-- Fakturadato -->
+                <div class="line">
+                    <span class="label">Fakturadato</span>
+                    <span class="value">
+                        <t t-if="this.state.inv_date" t-esc="this.state.inv_date"/>
+                        <t t-if="this.props.reprint_order and this.props.reprint_order.inv_date"
+                           t-esc="this.props.reprint_order.inv_date"/>
+                    </span>
+                </div>
+
+                <!-- Forfaldsdato -->
+                <div class="line">
+                    <span class="label">Forfaldsdato</span>
+                    <span class="value">
+                        <t t-if="this.state.inv_invoice_date_due" t-esc="this.state.inv_invoice_date_due"/>
+                        <t t-if="this.props.reprint_order and this.props.reprint_order.inv_invoice_date_due"
+                           t-esc="this.props.reprint_order.inv_invoice_date_due"/>
+                    </span>
+                </div>
+
+                <!-- Kilde and Reference -->
+                <div class="line">
+                    <span class="label">Kilde</span>
+                    <span class="value">
+                        <t t-if="this.state.inv_company" t-esc="this.state.inv_company"/>
+                        <t t-if="this.props.reprint_order and this.props.reprint_order.inv_company"
+                           t-esc="this.props.reprint_order.inv_company"/>
+                    </span>
+                </div>
+                <div class="line">
+                    <span class="label">Reference</span>
+                    <span class="value">
+                        <t t-if="this.state.inv_customer_reference" t-esc="this.state.inv_customer_reference"/>
+                        <t t-if="this.props.reprint_order and this.props.reprint_order.inv_customer_reference"
+                           t-esc="this.props.reprint_order.inv_customer_reference"/>
+                    </span>
+                </div>
+            </div>
+            <!-- Faktura Data ends here -->
+            <!--        Deposit-->
+            <div t-elif="receipt.total_with_tax === 0 and this.props.order.orderlines.length === 0">
+                <br/>
+                <p>Depositum accepteret</p>
+            </div>
+        </xpath>
+        <!--    Order lines begin here-->
+        <xpath expr="//div[@class='orderlines']" position="replace">
+            <div class="orderlines" style="margin-bottom:4px;">
+                <t t-call="OrderLinesReceiptReplaced"/>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

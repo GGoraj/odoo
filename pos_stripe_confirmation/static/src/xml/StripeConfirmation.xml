@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="StripeConfirmation" owl="1">
+
+        <div class="pos-receipt">
+            <t t-if="props.receipt.company.logo">
+                <img class="pos-receipt-logo" t-att-src="props.receipt.company.logo" alt="Logo"/>
+                <br/>
+            </t>
+            <t t-if="!props.receipt.company.logo">
+                <h2 class="pos-receipt-center-align">
+                    <t t-esc="props.receipt.company.name"/>
+                </h2>
+                <br/>
+            </t>
+            <div class="pos-receipt-contact">
+                <t t-if="props.receipt.company.contact_address">
+                    <div>
+                        <t t-esc="props.receipt.company.contact_address"/>
+                    </div>
+                </t>
+                <t t-if="props.receipt.company.phone">
+                    <div>Tel:
+                        <t t-esc="props.receipt.company.phone"/>
+                    </div>
+                </t>
+                <t t-if="props.receipt.company.vat">
+                    <div><t t-esc="props.receipt.company.vat_label"/>:
+                        <t t-esc="props.receipt.company.vat"/>
+                    </div>
+                </t>
+                <t t-if="props.receipt.company.email">
+                    <div>
+                        <t t-esc="props.receipt.company.email"/>
+                    </div>
+                </t>
+                <t t-if="props.receipt.company.website">
+                    <div>
+                        <t t-esc="props.receipt.company.website"/>
+                    </div>
+                </t>
+                <t t-if="props.receipt.header_html">
+                    <t t-out="props.receipt.header_html"/>
+                </t>
+                <t t-if="!props.receipt.header_html and props.receipt.header">
+                    <div style="white-space:pre-line">
+                        <t t-esc="props.receipt.header"/>
+                    </div>
+                </t>
+                <t t-if="props.receipt.cashier">
+                    <div class="cashier">
+                        <div>--------------------------------</div>
+                        <div>Served by
+                            <t t-esc="props.receipt.cashier"/>
+                        </div>
+                    </div>
+                </t>
+            </div>
+            <!--            end of company info-->
+
+            <br/>
+            <br/>
+            <!--            payment confirmation details-->
+            <div class="receipt">
+                 <!--                order nr-->
+                <div class="line">
+                    <span class="label">Bestilling</span>
+                    <span t-if="confirmation_data" class="value" t-esc="confirmation_data.order_name"/>
+                </div>
+                <!--                date-->
+                <div class="line">
+                    <span class="label">Dato</span>
+                    <span t-if="confirmation_data" class="value" t-esc="confirmation_data.validation_date"/>
+                </div>
+<!--                time-->
+                 <div class="line">
+                    <span class="label">Tid</span>
+                    <span t-if="confirmation_data" class="value" t-esc="confirmation_data.validation_time"/>
+                </div>
+                <br/>
+                <!--                pos name-->
+                <div class="line">
+                    <span class="label">Salgsstedet</span>
+                    <span t-if="confirmation_data" class="value" t-esc="confirmation_data.pos_name"/>
+                </div>
+                <!--                system's payment type-->
+                <div class="line">
+                    <span class="label">Betalings type</span>
+                    <span t-if="confirmation_data" class="value" t-esc="confirmation_data.payment_type"/>
+                </div>
+                <!--                response-->
+                <div class="line">
+                    <span class="label">Status</span>
+                    <span t-if="confirmation_data" class="value" t-esc="confirmation_data.payment_status"/>
+                </div>
+                <!--                transaction id-->
+                <div class="line">
+                    <span class="label">Ref.</span>
+                    <span t-if="confirmation_data" class="value" t-esc="confirmation_data.transaction_id"/>
+                </div>
+
+                <!--                card section-->
+                <br/>
+                <div class="line">
+                    <span class="label">Kort nr.</span>
+                    <span t-if="confirmation_data" class="value" t-esc="confirmation_data.masked_pan"/>
+                </div>
+                <!--                entry mode-->
+                <div class="line">
+                    <span class="label">Indgangstilstand</span>
+                    <span  class="value" t-esc="confirmation_data.card_entry_method"/>
+                </div>
+                <!-- card type -->
+                <div class="line">
+                    <span class="label">Kort type</span>
+                    <span class="value" t-if="confirmation_data"  t-esc="confirmation_data.card_type"/>
+                </div>
+                <!-- Total (I alt) -->
+                <br/>
+                <div class="line">
+                    <span class="label">I Alt</span>
+                    <span class="value" t-esc="confirmation_data.amount"/>
+                </div>
+
+            </div>
+        </div>
+    </t>
+
+</templates>

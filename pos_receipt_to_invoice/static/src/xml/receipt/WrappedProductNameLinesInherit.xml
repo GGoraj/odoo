@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="WrappedProductNameLines" t-inherit="point_of_sale.WrappedProductNameLines" owl="1">
+        <xpath expr="//span/t[@t-foreach='props.line.product_name_wrapped.slice(1)']" position="replace">
+            <t t-foreach="props.line.product_name_wrapped.slice(1)" t-as="wrapped_line" t-key="wrapped_line_index">
+                <t t-esc="wrapped_line"/>
+                <br/>
+                <span style="color:red">wrappedPNL!</span>
+            </t>
+        </xpath>
+    </t>
+</templates>

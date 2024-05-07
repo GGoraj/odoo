@@ -1,0 +1,11 @@
+Required:
+
+1. Install Stripe cli in Odoo.sh console.
+'pip3 install stripe'
+
+2. Add Stripe Secret:
+Steps:
+Enter Debug Mode,
+Settings -> Technical -> System Parameters
+key: stripe_secret_key
+value: your_stripe_secret

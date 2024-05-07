@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <t t-name="pos_receipt_screen_print_payment_confirmation_button" t-inherit="point_of_sale.ReceiptScreen"
+       t-inherit-mode="extension">
+        <xpath expr="//div[@class='buttons']" position="inside">
+            <div t-if="this.props.should_print_confirmation" class="button print" style="margin-left:2em" t-on-click="printConfirmationClicked">
+                <i class="fa fa-print"></i>
+                Print Confirmation
+            </div>
+        </xpath>
+    </t>
+</odoo>

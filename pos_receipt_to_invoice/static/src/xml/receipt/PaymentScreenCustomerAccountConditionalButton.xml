@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="PaymentScreenCustomerAccountConditionalButton" t-inherit="point_of_sale.PaymentScreen"
+       t-inherit-mode="extension">
+        <xpath expr="//div[@class='paymentmethods-container']" position="replace">
+            <div class="paymentmethods-container">
+                <div class="paymentmethods">
+                    <p class="title-category">Payment method</p>
+                    <t t-foreach="payment_methods_from_config" t-as="paymentMethod"
+                       t-key="paymentMethod.id">
+                        <div t-if="!(this.currentOrder.get_partner().name === 'Privat Kunde' and
+                            paymentMethod.name === 'Customer Account')" class="button paymentmethod"
+                             t-on-click="() => this.trigger('new-payment-line', paymentMethod)">
+                            <div class="payment-name">
+                                <t t-esc="paymentMethod.name"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <PaymentScreenPaymentLines paymentLines="paymentLines"/>
+            </div>
+        </xpath>
+    </t>
+</templates>

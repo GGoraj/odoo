@@ -1,0 +1,4 @@
+ReceiptScreen should display the Print Confirmation button as well as Stripe Confirmation preview
+only if the Bank payment (card payment) was used on previous screen (Payment Screen).
+First user clicks 'Send Payment Request' button after choosing type of payment 'Bank'.
+Payment is then sent to the terminal and props are sent to ReceiptScreen switching 'stripeConfirmation' state to True.

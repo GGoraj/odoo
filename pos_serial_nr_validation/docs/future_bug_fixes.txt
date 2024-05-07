@@ -1,0 +1,2 @@
+1. When serial number is duplicated, first input should remain intact, rest should be marked red.
+   When the other inputs are removed, then remaining input turns black.

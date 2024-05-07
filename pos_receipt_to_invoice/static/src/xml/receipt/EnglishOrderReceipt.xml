@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="english-translated-receipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='cashier']" position="replace">
+            <div class="cashier">
+                <div>--------------------------------</div>
+                <div>Betjenes af
+                    <t t-esc="receipt.cashier"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[@class='pos-receipt-amount']" position="replace">
+            <div class="pos-receipt receipt" style="font-size: 125%; display: flex; justify-content: space-between;">
+                <span class="label">I ALT</span>
+                <span class="value" t-esc="env.pos.format_currency(receipt.total_with_tax)"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[@class='pos-receipt-amount receipt-change']" position="replace">
+            <div class="pos-receipt receipt" style="font-size: 125%; display: flex; justify-content: space-between;">
+                <span class="label">BYTTEPENGE</span>
+                <span class="value" t-esc="env.pos.format_currency(receipt.change)"/>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-if='isTaxIncluded']/div[contains(text(), 'Total Taxes')]" position="replace">
+            <div>
+                Samlede Skatter
+                <span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/>
+            </div>
+        </xpath>
+    </t>
+</templates>

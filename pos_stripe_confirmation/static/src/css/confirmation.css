@@ -1,0 +1,21 @@
+.receipt .line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.receipt .separator {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.receipt .label {
+    flex: 1;
+    text-align: left;
+}
+
+.receipt .value {
+    flex: 1;
+    text-align: right;
+    white-space: nowrap;
+}

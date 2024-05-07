@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-inherit="point_of_sale.EditListPopup" t-inherit-mode="extension">
+
+        <!--        make more room horizontally -->
+        <xpath expr="//div[hasclass('popup-text')]" position="attributes">
+            <attribute name="style">max-width: 550px;</attribute>
+            <attribute name="style">max-height: 900px;</attribute>
+        </xpath>
+
+
+        <xpath expr="//main" position="attributes">
+            <attribute name="t-on-clear-errors">clearPopupErrors</attribute>
+            <attribute name="t-on-validate-single-line">validatePopupEntries</attribute>
+        </xpath>
+
+        <xpath expr="//main/t/EditListInput" position="attributes">
+            <attribute name="t-props">{'product_id' : props.product_id, 'lastLineFaulty' : state.lastLineFaulty}
+            </attribute>
+        </xpath>
+
+        <xpath expr="//footer" position="replace">
+
+            <footer class="footer" style="border-top-color:rgba(255,255,255); margin-bottom:5px">
+                <div class="button confirm highlight" t-on-click="confirm">
+                    Ok
+                </div>
+                <div class="button cancel" t-on-click="cancel">
+                    Cancel
+                </div>
+                <div class="validated-errors">
+                    <span t-if="state.errSerialNotAssignedToSelectedProduct === true">Serial number not found.</span>
+                    <span t-if="state.errSpecialCharacters === true">Special characters not allowed.</span>
+                    <span t-if="state.errProductAlreadyOnTheList === true">Product already on the list.</span>
+                    <span t-if="state.errFirstLineEmpty === true">First Line Empty</span>
+                </div>
+            </footer>
+
+        </xpath>
+    </t>
+</templates>

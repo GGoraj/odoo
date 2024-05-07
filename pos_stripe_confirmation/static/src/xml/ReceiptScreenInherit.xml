@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <t t-name="pos_stripe_confirmation" t-inherit="point_of_sale.ReceiptScreen" t-inherit-mode="extension">
+        <xpath expr="//div[@class='default-view']/div[@class='pos-receipt-container']" position="after">
+            <div t-if="this.props.should_print_confirmation" class="pos-receipt-container" t-ref="stripe-confirmation">
+                <StripeConfirmation receipt="currentOrder.getOrderReceiptEnv().receipt"/>
+            </div>
+        </xpath>
+    </t>
+</odoo>
